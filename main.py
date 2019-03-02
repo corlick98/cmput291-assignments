@@ -5,6 +5,8 @@ import pandas as pd
 def main():
 	# This is the primary control area to the questions
 	
+	connection = sqlite3.connect('a2.db')
+
 	print('Welcome to the Paper Review Database')
 	
 	exit_program = False
