@@ -12,7 +12,7 @@ def main():
 		printoptions()
 		try:
 			user_input = int(input('Select the option number you wish to see: '))
-		except TypeError:
+		except ValueError:
 			print('Please enter a valid selection')
 		
 		if user_input not in range(1,8):
