@@ -6,4 +6,6 @@ def printoptions():
     print("4. How many sessions does each author participate in")
     print("5. Pie chart of top 5 most popular areas")
     print("6. Bar chart of each reviewers average review scores")
+    print("7. Exit program")
     return
+main()
