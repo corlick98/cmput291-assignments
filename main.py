@@ -1,5 +1,6 @@
 import sqlite3
 import time
+import pandas as pd
 
 def main():
 	# This is the primary control area to the questions
@@ -13,11 +14,16 @@ def main():
 		try:
 			user_input = int(input('Select the option number you wish to see: '))
 		except ValueError:
+			print()
 			print('Please enter a valid selection')
+			print()
+			time.sleep(1)
 			continue
 		
 		if user_input not in range(1,8):
+			print()
 			print('Please enter a valid selection')
+			print()
 			time.sleep(1)
 			continue
 			
