@@ -30,17 +30,17 @@ def main():
 			continue
 			
 		if user_input == 1:
-			question1()
+			question1(connection)
 		elif user_input == 2:
-			question2()
+			question2(connection)
 		elif user_input == 3:
-			question3()
+			question3(connection)
 		elif user_input == 4:
-			question4()
+			question4(connection)
 		elif user_input == 5:
-			question5()
+			question5(connection)
 		elif user_input == 6:
-			question6()
+			question6(connection)
 		elif user_input == 7:
 			exit_program = True
 
