@@ -8,15 +8,18 @@ def question1(connection):
         except ValueError:
             print("Please enter a valid paper ID")
             continue
-        if paperid in p_df["Id"]:
+        if (paperid-1) in p_df["Id"]:
             invalid = False
         else:
             print("Please enter a valid paper ID")
     c = connection.cursor()
     c.execute('select reviewer from reviews where paper=?;',(paperid,))
     revs = c.fetchall()
-    print(revs)
-    
-
-
+    if revs == []:
+        print("Nobody reviewed paper "+str(paperid))
+    else:
+        print("The reviewers who have reviewed paper "+str(paperid)+" are:")
+        for reviewer in revs:
+            print(reviewer[0])
+    print()
     return
