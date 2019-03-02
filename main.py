@@ -1,6 +1,8 @@
 import sqlite3
 import time
 import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
 
 def main():
 	# This is the primary control area to the questions
