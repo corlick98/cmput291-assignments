@@ -14,11 +14,13 @@ def main():
 			user_input = int(input('Select the option number you wish to see: '))
 		except ValueError:
 			print('Please enter a valid selection')
+			continue
 		
 		if user_input not in range(1,8):
 			print('Please enter a valid selection')
 			time.sleep(1)
 			continue
+			
 		if user_input == 1:
 			question1()
 		elif user_input == 2:
