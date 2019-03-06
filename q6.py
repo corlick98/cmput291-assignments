@@ -5,21 +5,10 @@ def question6(connection):
     AVG(soundness), AVG(overall) from reviews group by reviewer;",connection)
 
     
-    #print(r_df.columns)
-
-    r_df2 = pd.DataFrame(r_df.iloc[:,1:], columns=r_df.columns[1:], index = r_df.iloc[:,0])
-    print(r_df2.axes)
-    r_df2.plot.bar()
+    # print(r_df)
+    r_df2 = pd.DataFrame(r_df.iloc[:,1:], columns=r_df.columns[1:])
+    r_df2.plot.bar().set_xticklabels(r_df.iloc[:,0])
     plt.plot()
     plt.show()
-
-
-    #print(r_df)
-
-
-
-
-
-
 
     return
