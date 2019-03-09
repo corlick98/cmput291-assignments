@@ -10,7 +10,7 @@ def question2(connection):
     p_df = pd.read_sql_query("select Id, title, author, area from papers;",connection)
     notselected = True
     start = 0
-    end = 5
+    end = min(5,len(p_df))
     while notselected:
         print(p_df[start:end]) # show 5 papers at most
         invalid=True
@@ -58,7 +58,8 @@ def question2(connection):
                 and not exists( select *
                                 from reviews r
                                 where r.reviewer = e.reviewer
-                                and r.paper = :pid)''',{"parea":p_df.iloc[paperid-1,3],"pid":paperid})
+                                and r.paper = :pid
+                                and r.reviewer = :pauthor)''',{"parea":p_df.iloc[paperid-1,3],"pid":paperid,"pauthor":p_df.iloc[paperid-1,2]})
     # print potential reviewers
     rows = c.fetchall()
     if rows == []:
