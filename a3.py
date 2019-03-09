@@ -211,7 +211,7 @@ def question2(connection):
     c.execute('''insert into reviews values
                 (:pid, :rname, :orig, :impor, :sound, :overall)
                 ''',{"pid":paperid, "rname":rows[reviewid][0], "orig":int(values[0]),"impor":int(values[1]),"sound":int(values[2]),"overall":int(values[3])})
-    #connection.commit()
+    connection.commit()
     
     return
 
