@@ -16,6 +16,7 @@ def question2(connection):
         invalid=True
         while invalid:
             try:
+                print("Press N to go to next page. Press P to go to previous")
                 paperid = input("select a paper ID: ")
                 # if N show next page
                 if paperid == "N":
