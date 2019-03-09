@@ -3,7 +3,7 @@
 # (1) a bar plot of all individual authors and how many sessions they participate in
 # (2) just providing a number for a selected individual
 def question4(connection):
-    df = pd.read_sql_query("select author,count(csession) as count from papers group by author;", connection)
+    df = pd.read_sql_query("select author,count(csession) as count from papers where decision = 'A' AND author is not NULL group by author;", connection)
     valid_input = False
     
     while valid_input == False:
