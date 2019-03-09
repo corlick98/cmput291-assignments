@@ -6,8 +6,9 @@ import numpy as np
 
 def main():
 	# This is the primary control area to the questions
-	# connec to the database
-	connection = sqlite3.connect('a2.db')
+	# connect to the database
+	dbname = input("Enter database name: ")
+	connection = sqlite3.connect(dbname)
 
 	print('Welcome to the Paper Review Database')
 	

@@ -1,5 +1,5 @@
 
-# Show all papers* and allow one to be selected. Once a papers is selected, 
+# Show all papers and allow one to be selected. Once a papers is selected, 
 # show all potential reviewers for that paper. 
 # Potential reviewers shown must have the same area of expertise as the paper. 
 # If reviewer has already reviewed the paper, they should not be able to review it again 
@@ -10,12 +10,13 @@ def question2(connection):
     p_df = pd.read_sql_query("select Id, title, author, area from papers;",connection)
     notselected = True
     start = 0
-    end = 5
+    end = min(5,len(p_df))
     while notselected:
         print(p_df[start:end]) # show 5 papers at most
         invalid=True
         while invalid:
             try:
+                print("Press N to go to next page. Press P to go to previous")
                 paperid = input("select a paper ID: ")
                 # if N show next page
                 if paperid == "N":
@@ -55,10 +56,11 @@ def question2(connection):
     c.execute('''select e.reviewer 
                 from expertise e
                 where e.area = :parea
+                and e.reviewer != :pauthor
                 and not exists( select *
                                 from reviews r
                                 where r.reviewer = e.reviewer
-                                and r.paper = :pid)''',{"parea":p_df.iloc[paperid-1,3],"pid":paperid})
+                                and r.paper = :pid)''',{"parea":p_df.iloc[paperid-1,3],"pid":paperid,"pauthor":p_df.iloc[paperid-1,2]})
     # print potential reviewers
     rows = c.fetchall()
     if rows == []:
@@ -88,11 +90,16 @@ def question2(connection):
         else:
             print("Please enter a valid reviewer ID")
     # get the marks for the paper
-    values = input("Please enter "+rows[reviewid][0]+"'s review marks for paper "+str(paperid)+": ").split(",")
+    values = [0,0,0,0]
+    values[0] = input("Please enter "+rows[reviewid][0]+"'s originality mark for paper "+str(paperid)+": ")
+    values[1] = input("Please enter "+rows[reviewid][0]+"'s importance mark for paper "+str(paperid)+": ")
+    values[2] = input("Please enter "+rows[reviewid][0]+"'s soundness mark for paper "+str(paperid)+": ")
+    values[3] = input("Please enter "+rows[reviewid][0]+"'s overall mark for paper "+str(paperid)+": ")
     # insert the marks into the database for that review
     c = connection.cursor()
     c.execute('''insert into reviews values
                 (:pid, :rname, :orig, :impor, :sound, :overall)
                 ''',{"pid":paperid, "rname":rows[reviewid][0], "orig":int(values[0]),"impor":int(values[1]),"sound":int(values[2]),"overall":int(values[3])})
+    #connection.commit()
     
     return
