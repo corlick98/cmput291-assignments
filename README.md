@@ -1,7 +1,7 @@
 # CMPUT 291 Assignment 3
 
 # Group Members:
-    # Fahad Ahammed CCID: #########
+    # Fahad Ahammed CCID: ahaammed
     # Christopher Orlick CCID: corlick
     # Bryland Schoneck CCID: schoneck
 
