@@ -1,5 +1,5 @@
 
-# Show all papers* and allow one to be selected. Once a papers is selected, 
+# Show all papers and allow one to be selected. Once a papers is selected, 
 # show all potential reviewers for that paper. 
 # Potential reviewers shown must have the same area of expertise as the paper. 
 # If reviewer has already reviewed the paper, they should not be able to review it again 

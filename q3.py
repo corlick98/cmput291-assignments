@@ -6,7 +6,7 @@ def question3(connection):
     invalid = True
     while invalid:
         try:
-            num_range = input("Enter a number range (x,y): ").split(",")  # Separate range ints
+            num_range = input("Enter a number range \"x,y\": ").split(",")  # Separate range ints
             for i in num_range:  # Check for valid int inputs
                 i = int(i)
             invalid = False
@@ -20,7 +20,7 @@ def question3(connection):
     having count(*) between :num1 and :num2;',\
     {"num1":int(num_range[0]), "num2":int(num_range[1])})
 
-    # Print out each reviewer on seperate line from query table
+    # Print out each reviewer on separate line from query table
     revs = c.fetchall()
     for each in revs:
         print(each[0])

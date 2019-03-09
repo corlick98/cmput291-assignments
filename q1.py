@@ -1,5 +1,5 @@
 
-# Show all papers* and allow one to be selected. Once a paper is selected, 
+# Show all papers and allow one to be selected. Once a paper is selected, 
 # show the email of all reviewers that have reviewed the paper.
 def question1(connection):
     # get Id, title and author for all papers
