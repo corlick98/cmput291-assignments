@@ -38,9 +38,4 @@ def question4(connection):
                     valid_name = True
                     print()
 
-        
-                          
-
-
-   
     return

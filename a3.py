@@ -248,7 +248,7 @@ def question3(connection):
 # (1) a bar plot of all individual authors and how many sessions they participate in
 # (2) just providing a number for a selected individual
 def question4(connection):
-    df = pd.read_sql_query("select author,count(csession) as count from papers group by author;", connection)
+    df = pd.read_sql_query("select author,count(csession) as count from papers where decision = 'A' AND author is not NULL group by author;", connection)
     valid_input = False
     
     while valid_input == False:
@@ -271,15 +271,18 @@ def question4(connection):
             valid_input =  True
             
         elif usr_input == 2:
-            print(df.iloc[ : , 0])
-            author_name = (input("\nwrite the email of the author: "))
-            print(df[df.author== author_name])
-            valid_input = True           
-        
-                          
+            x=df["author"]
+            print(x)
+            valid_input = True
+            valid_name = False
+            while valid_name == False:
+                print()
+                author_name = (input("\nwrite the email of the author: "))
+                if (df["author"].isin([author_name]).any()):
+                    print(df[df.author == author_name])
+                    valid_name = True
+                    print()
 
-
-   
     return
 
 # Create a pie chart of the top 5 most popular areas, popularity comes from the number of papers under the area. 
