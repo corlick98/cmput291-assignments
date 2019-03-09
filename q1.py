@@ -6,7 +6,7 @@ def question1(connection):
     p_df = pd.read_sql_query("select Id, title, author from papers;",connection)
     notselected = True
     start = 0
-    end = 5
+    end = min(5,len(p_df))
     while notselected:
         print(p_df[start:end]) # show 5 papers at most
         invalid=True
