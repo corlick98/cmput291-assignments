@@ -23,10 +23,18 @@ def question4(connection):
             valid_input =  True
             
         elif usr_input == 2:
-            print(df.iloc[ : , 0])
-            author_name = (input("\nwrite the email of the author: "))
-            print(df[df.author== author_name])
-            valid_input = True           
+            x=df["author"]
+            print(x)
+            valid_input = True
+            valid_name = False
+            while valid_name == False:
+                print()
+                author_name = (input("\nwrite the email of the author: "))
+                if (df["author"].isin([author_name]).any()):
+                    print(df[df.author == author_name])
+                    valid_name = True
+                    print()
+
         
                           
 
