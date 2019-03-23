@@ -20,7 +20,7 @@ def f2(connection, q2count):
     num_local = int(input("Enter number of locations: "))
 
     # Generate centralized map of Edmonton
-    q2map = folium.Map(location=[53.5444, -113.323], zoom_start=12)
+    q2map = folium.Map(location=[53.5444, -113.4909], zoom_start=12)
     maxsize = p_df.iloc[0,3]
     minsize = p_df.iloc[-1,3]
     for N in range(num_local):
@@ -43,7 +43,7 @@ def f2(connection, q2count):
             fill_color = 'crimson'
         ).add_to(q2map)
         
-    name = 'Q2-'+str(q2count)+'html'
+    name = 'Q2-'+str(q2count)+'.html'
     q2map.save(name)
 
-    return
+    return q2count
