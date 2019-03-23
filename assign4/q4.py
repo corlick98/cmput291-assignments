@@ -10,18 +10,30 @@ def f4(conn,q4count):
                             and CANADIAN_CITIZEN + NON_CANADIAN_CITIZEN + NO_RESPONSE !=0
                             and crime_incidents.Year between ? and ?
                             group by crime_incidents.Neighbourhood_Name''',conn, params=(start,end))
+                            
     ndf = pd.DataFrame(columns=["Neighborhood", "ratio"], index = range(0,len(df)), dtype = float)
     for i in range(0,len(df)):
         ndf.iloc[i, 0] = df.iloc[i,0]
         ndf.iloc[i, 1] =  float(df.iloc[i, 1]/ df.iloc[i, 2])
     pdf = ndf.nlargest(int(num), 'ratio', keep='all')
+
     maxval = pdf.iloc[0,1]
     q4map = folium.Map(location=[53.5444, -113.4909], zoom_start=11)
+
     for i in range(int(num)):
         stri = str(pdf.iloc[i,0])
         locs = pd.read_sql_query("select * from coordinates where Neighbourhood_Name = '%s';"%(stri),conn)
-        print(locs.iloc[0,1])
-        top_pop = 'test'
+        crimes = pd.read_sql_query('''select crime_type, sum(Incidents_Count) as s
+                                    from crime_incidents
+                                    where crime_incidents.Neighbourhood_Name = '%s'
+                                    and year between ? and ?
+                                    group by crime_type
+                                    order by s DESC'''%(stri),conn, params=(start,end))
+        # print(stri)
+        # print(crimes.iloc[0,0])
+        # print(str(crimes.iloc[0,1]/crimes.sum().iloc[1]))
+        
+        top_pop = stri + ' <br> ' + crimes.iloc[0,0] + ' <br> ' + str(crimes.iloc[0,1]/crimes.sum().iloc[1])
         folium.Circle(
             location = [locs.iloc[0,1], locs.iloc[0,2]],
             popup = top_pop,
