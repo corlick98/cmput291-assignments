@@ -1,12 +1,12 @@
 import pandas as pd
-import sqlite3
-import folium
+import sqlite3, folium
 import numpy as np
 import matplotlib.pyplot as plt
+
 def main():
     dname = input("Enter the database name: ")
     conn = sqlite3.connect(dname)
-    q1count=0
+    q1count=0 # for keeping track of how many times each question was executed
     q2count=0
     q3count=0
     q4count=0
@@ -25,3 +25,5 @@ def main():
             return
         else:
             print("Please enter a valid selection")
+
+    return
