@@ -34,12 +34,11 @@ def f3(connection,q3count):
     #print(type(pdf.iloc[counter,1]))
     while (counter < N):
         pop_up = str(pdf.iloc[counter,0]) + ' <br> ' + str(pdf.iloc[counter,1])		# declaring the pop_up the to be the name of the 
-											# neighborhood and its crime count 
-        
-	folium.Circle(						# making the circle and giving its arguments
+        									                                        # neighborhood and its crime count 
+        folium.Circle(						# making the circle and giving its arguments
             location= [pdf.iloc[counter,2], pdf.iloc[counter,3]],		# location from the tuple
             popup = pop_up,							# popup is initialized to be the string pop_up
-            radius= int(pdf.iloc[counter,1]) * 10,                      #masking problem
+            radius= int(pdf.iloc[counter,1]) * 50,                      #masking problem
             color= 'crimson',						# circle color
             fill= True,
             fill_color='crimson'					# fill color
