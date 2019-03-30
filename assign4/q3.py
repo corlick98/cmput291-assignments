@@ -28,7 +28,7 @@ def f3(connection,q3count):
     pdf = df.nlargest(N, 'Count', keep='all')			# the dataframe is created with the N largest tuples and ties are counted
     #print(pdf)
 
-    m = folium.Map(location=[53.5444, -113.4909], zoom_start=12)             # declaring a folium. map variable with the co-ordinates
+    m = folium.Map(location=[53.5444, -113.4909], zoom_start=11)             # declaring a folium. map variable with the co-ordinates
     counter = 0								# a counter to add each tuple to the map
     #print(pdf.iloc[counter,1])
     #print(type(pdf.iloc[counter,1]))
