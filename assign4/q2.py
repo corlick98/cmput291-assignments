@@ -22,7 +22,7 @@ def f2(connection, q2count):
     num_local = int(input("Enter number of locations: "))
 
     # Generate centralized map of Edmonton
-    q2map = folium.Map(location=[53.5444, -113.4909], zoom_start=12)
+    q2map = folium.Map(location=[53.5444, -113.4909], zoom_start=11)
 
     # Create max/min for relative sizes
     maxsize = p_df.iloc[0,3]

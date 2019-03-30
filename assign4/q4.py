@@ -36,8 +36,12 @@ def f4(conn,q4count):
                                     and year between ? and ?
                                     group by crime_type
                                     order by s DESC'''%(stri),conn, params=(start,end))
+        crimes = crimes.nlargest(1,'s',keep='all')
         # generate popup text
-        top_pop = stri + ' <br> ' + crimes.iloc[0,0] #+ ' <br> ' + str(crimes.iloc[0,1]/crimes.sum().iloc[1])
+        top_pop = stri
+        # if there are any ties put all of them in the popup
+        for i in range(0,len(crimes)):
+            top_pop += ' <br> ' + crimes.iloc[i,0] #+ ' <br> ' + str(crimes.iloc[0,1]/crimes.sum().iloc[1])
         folium.Circle(
             location = [locs.iloc[0,1], locs.iloc[0,2]],
             popup = top_pop,
