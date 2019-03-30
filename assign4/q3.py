@@ -15,8 +15,8 @@ def f3(connection,q3count):
 	
 	# This query groups by Neighbourhood name and takes the tuples which have 
 	# specific crime type into account in the given range. It also sorts the 
-	# output table in descending order of the count of that count of that
-	# crime type 
+	# output table in descending order of the count of that crime type 
+
     df = pd.read_sql_query('''select crime_incidents.Neighbourhood_Name as Neighbourhood_Name, sum(Incidents_Count) as Count, Latitude, Longitude
                 from crime_incidents, coordinates
                 where crime_incidents.Year BETWEEN %s AND %s  
@@ -27,7 +27,7 @@ def f3(connection,q3count):
                 %(start, end, crime),connection)
     pdf = df.nlargest(N, 'Count', keep='all')			# the dataframe is created with the N largest tuples and ties are counted
     #print(pdf)
-
+    maxval = pdf.iloc[0,1]
     m = folium.Map(location=[53.5444, -113.4909], zoom_start=11)             # declaring a folium. map variable with the co-ordinates
     counter = 0								# a counter to add each tuple to the map
     #print(pdf.iloc[counter,1])
@@ -38,7 +38,8 @@ def f3(connection,q3count):
         folium.Circle(						# making the circle and giving its arguments
             location= [pdf.iloc[counter,2], pdf.iloc[counter,3]],		# location from the tuple
             popup = pop_up,							# popup is initialized to be the string pop_up
-            radius= int(pdf.iloc[counter,1]),                      #masking problem
+            #radius= int(pdf.iloc[counter,1]),                      #masking problem
+            radius=(1000 * pdf.iloc[counter,1]) / maxval,
             color= 'crimson',						# circle color
             fill= True,
             fill_color='crimson'					# fill color
