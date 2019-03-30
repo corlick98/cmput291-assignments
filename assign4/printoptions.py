@@ -1,4 +1,5 @@
 
+# print the options the user has to chose from
 def printoptions():
     print("1: Creates a bar plot of the monthwise total of a type of crime in a range of years")
     print("2: Shows the N most and least populous neighborhoods on a map")
