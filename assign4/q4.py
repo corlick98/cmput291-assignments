@@ -26,7 +26,7 @@ def f4(conn,q4count):
     maxval = pdf.iloc[0,1] # get the largest crime to population ratio for scaling
     q4map = folium.Map(location=[53.5444, -113.4909], zoom_start=11)
 
-    for i in range(int(num)):
+    for i in range(len(pdf)):
         stri = str(pdf.iloc[i,0]) # neighborhood name
         locs = pd.read_sql_query("select * from coordinates where Neighbourhood_Name = '%s';"%(stri),conn) # coordinates of the neighborhood
         # get most common crime type (mostly remnant from when you wanted ratio of crimes commited)
@@ -36,7 +36,7 @@ def f4(conn,q4count):
                                     and year between ? and ?
                                     group by crime_type
                                     order by s DESC'''%(stri),conn, params=(start,end))
-        crimes = crimes.nlargest(1,'s',keep='all')
+        crimes = crimes.nlargest(1,'s',keep='all') # for ties in the number of a type of crime
         # generate popup text
         top_pop = stri
         # if there are any ties put all of them in the popup
