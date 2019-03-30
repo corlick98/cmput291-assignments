@@ -21,10 +21,10 @@ def f2(connection, q2count):
                                 % (Total_pop, Total_pop, Total_pop),
                                 connection)
 
+    # Create data frames for top and bottom
     t_df = p_df.nlargest(num_local, "Tpop", keep = "all")
     b_df = p_df.nsmallest(num_local, "Tpop", keep = "all")
-    print(t_df)
-    print(b_df)
+
     # Generate centralized map of Edmonton
     q2map = folium.Map(location=[53.5444, -113.4909], zoom_start=11)
 
