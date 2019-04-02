@@ -28,8 +28,7 @@ def f3(connection,q3count):
     pdf = df.nlargest(N, 'Count', keep='all')			# the dataframe is created with the N largest tuples and ties are counted
     maxval = pdf.iloc[0,1]              # get the largest count for scaling
     m = folium.Map(location=[53.5444, -113.4909], zoom_start=11)             # declaring a folium. map variable with the co-ordinates
-    counter = 0								# a counter to add each tuple to the map
-    while (counter < N):
+    for counter in range(len(pdf)):
         pop_up = str(pdf.iloc[counter,0]) + ' <br> ' + str(pdf.iloc[counter,1])		# declaring the pop_up the to be the name of the 
         									                                        # neighborhood and its crime count 
         folium.Circle(						# making the circle and giving its arguments
@@ -41,7 +40,6 @@ def f3(connection,q3count):
             fill= True,
             fill_color='crimson'					# fill color
         ).add_to(m)							# increment counter
-        counter = 1 + counter
  
     name = 'Q3-'+str(q3count)+'.html'					# name the file to whateever the count of q3count is
     m.save(name)							# save the map

@@ -30,18 +30,18 @@ def f4(conn,q4count):
         stri = str(pdf.iloc[i,0]) # neighborhood name
         locs = pd.read_sql_query("select * from coordinates where Neighbourhood_Name = '%s';"%(stri),conn) # coordinates of the neighborhood
         # get most common crime type (mostly remnant from when you wanted ratio of crimes commited)
-        crimes = pd.read_sql_query('''select crime_type, sum(Incidents_Count) as s
+        tot_crimes = pd.read_sql_query('''select crime_type, sum(Incidents_Count) as s
                                     from crime_incidents
                                     where crime_incidents.Neighbourhood_Name = '%s'
                                     and year between ? and ?
                                     group by crime_type
                                     order by s DESC'''%(stri),conn, params=(start,end))
-        crimes = crimes.nlargest(1,'s',keep='all') # for ties in the number of a type of crime
+        crimes = tot_crimes.nlargest(1,'s',keep='all') # for ties in the number of a type of crime
         # generate popup text
         top_pop = stri
         # if there are any ties put all of them in the popup
         for i in range(0,len(crimes)):
-            top_pop += ' <br> ' + crimes.iloc[i,0] #+ ' <br> ' + str(crimes.iloc[0,1]/crimes.sum().iloc[1])
+            top_pop += ' <br> ' + crimes.iloc[i,0] + ' <br> ' + str(crimes.iloc[i,1]/tot_crimes.sum().iloc[1])
         folium.Circle(
             location = [locs.iloc[0,1], locs.iloc[0,2]],
             popup = top_pop,
